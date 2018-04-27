@@ -79,4 +79,7 @@ BinarySearchTree.prototype.depthFirstLog = function(cb) {
 
 /*
  * Complexity: What is the time complexity of the above functions?
+ insert() - O(log N) ~ O(N);
+ contains() - O(log N) ~ O(N);
+ depthfirstlog() - O(N);
  */
