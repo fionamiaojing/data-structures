@@ -30,9 +30,9 @@ Graph.prototype.removeNode = function(node) {
   if (this.nodes.includes(node)) {
     this.nodes.splice(this.nodes.indexOf(node), 1);
     while (this.edges[node].length) {
-      console.log(this.edges[node]);
       this.removeEdge(node, this.edges[node][0]);
     }
+    delete this.edges[node];
   } 
 };
 

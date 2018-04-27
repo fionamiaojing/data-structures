@@ -35,11 +35,14 @@ HashTable.prototype.retrieve = function(k) {
   //loop through each tuple to find the key(k);
   
   var bucket = this._storage.get(index);
-  for (var i = 0; i < bucket.length; i++) {
-    if (bucket[i][0] === k) {
-      return bucket[i][1];
+  if (bucket) {
+    for (var i = 0; i < bucket.length; i++) {
+      if (bucket[i][0] === k) {
+        return bucket[i][1];
+      }
     }
   }
+  
 };
 
 HashTable.prototype.remove = function(k) {

@@ -27,10 +27,13 @@ var LinkedList = function() {
     //return current head
     //if false:
     //return undefined
-
-    if (list.head) {
+    
+    if (list.head !== null) {
       var currentHead = list.head.value;
       list.head = list.head.next;
+      if (list.head === null) {
+        list.tail = null;
+      }
       return currentHead;
     } else {
       return undefined;
