@@ -4,6 +4,7 @@ var BinarySearchTree = function(value) {
   tree.value = value;
   tree.left = null;
   tree.right = null;
+  tree.depth = 0;
   
   return tree;  
 };
@@ -68,7 +69,7 @@ BinarySearchTree.prototype.depthFirstLog = function(cb) {
   //if true:
   //apply depthFirstLog on currentTree.right
     
-  cb(this.value);
+  cb(this.value, this);
   if (this.left !== null) {
     this.left.depthFirstLog(cb);
   }
@@ -76,6 +77,49 @@ BinarySearchTree.prototype.depthFirstLog = function(cb) {
     this.right.depthFirstLog(cb);
   }
 };
+
+BinarySearchTree.prototype.breathFirstLog = function(cb) {
+  var depthObj = {};
+  var maxDepth = 0;
+  this.depth = 0;
+  depthObj[0] = [this.value];
+  var depthcb = function(value, node) {
+    if (node.left) {
+      node.left.depth = node.depth + 1;
+      
+      if (node.left.depth in depthObj) {
+        depthObj[node.left.depth].push(node.left.value);
+      } else {
+        depthObj[node.left.depth] = [node.left.value];
+        maxDepth = Math.max(maxDepth, node.left.depth);
+        console.log('left' + maxDepth);
+      } 
+
+    }
+    if (node.right) {
+      node.right.depth = node.depth + 1;
+      if (node.right.depth in depthObj) {
+        depthObj[node.right.depth].push(node.right.value);
+      } else {
+        depthObj[node.right.depth] = [node.right.value];
+        maxDepth = Math.max(maxDepth, node.right.depth);
+        console.log('right' + maxDepth);
+      } 
+    }
+  };
+  
+  this.depthFirstLog(depthcb);
+  
+  for (var i = 0; i <= maxDepth; i++) {
+    
+    for (var j = 0; j < depthObj[i].length; j++) {
+      cb(depthObj[i][j]);
+    }
+  }
+  
+};
+
+
 
 /*
  * Complexity: What is the time complexity of the above functions?
