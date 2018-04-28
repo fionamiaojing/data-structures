@@ -32,4 +32,22 @@ describe('set', function() {
     expect(set.contains('Mel Gibson')).to.equal(false);
   });
 
+  it('should be able to add values as numbers', function() {
+    set.add(1);
+    set.add('1');
+    set.add(3);
+    expect(set.contains(1)).to.equal(true);
+    expect(set.contains('1')).to.equal(true);
+    expect(set.contains(3)).to.equal(true);
+  });
+  
+  it('should be able to add values of any types', function() {
+    var val1 = [1, 2, 3];
+    var val2 = {a: 1, b: 2};
+    set.add(val1);
+    set.add(val2);
+    expect(set.contains(val1)).to.equal(true);
+    expect(set.contains(val2)).to.equal(true);
+  });
+  
 });
